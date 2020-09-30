@@ -1,22 +1,17 @@
-import { PythonShell } from 'python-shell';
+import * as iwlist from 'wireless-tools/iwlist';
 
 export default async (req, res) => {
-	const options = {
-		mode: 'text',
-		pythonPath: process.env.pythonPath,
-		scriptPath: process.env.scriptDir,
-	};
-
-	PythonShell.run('scan_wifi.py', options, function (error, results) {
+	iwlist.scan('wlan0' ,function (error, networks) {
 		if (error) {
 			console.log(error);
 			res.status(500).json({ error: 'Internal Server Error' });
 		}
+
 		else {
-			// results is an array consisting of messages printed during execution
-			console.log(results);
-			const ssid_list = results.map(ssid => { return { name: ssid } });
+			console.log(networks);
+
+			const ssid_list = networks.map(({ ssid }) => { return { name: ssid } });
 			res.status(200).json({ ssid_list });
 		}
-	});
+	})
 }

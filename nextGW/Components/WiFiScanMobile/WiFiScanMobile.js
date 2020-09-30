@@ -66,7 +66,7 @@ export default function WiFiScanMobile({ baseURL }) {
     try {
       //store this url in an env file
       setScan('Scanning...');
-      const url = `${baseURL}/api/scan_wifi`;
+      const url = `/api/scan_wifi`;
       const response = await axios.get(url);
       const { ssid_list } = response.data;
       setData(ssid_list);

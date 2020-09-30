@@ -5,6 +5,7 @@ FROM balenalib/rpi-debian-node
 ENV PORT 3000
 
 RUN install_packages python
+RUN install_packages wireless-tools
 ### D-Bus calls needs to be directed to the system bus that the host OS is listening on
 ###
 ENV DBUS_SYSTEM_BUS_ADDRESS unix:path=/host/run/dbus/system_bus_socket
@@ -16,7 +17,9 @@ RUN apt-get update \
 
 ### `nmcli` will be available in the `/usr/src/app` folder
 ###
+RUN rm -rf /usr/src/app
 
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 ### Download and extract the `nmcli` utility
@@ -39,16 +42,16 @@ RUN apt-get clean \
 ### Copy NextGW and install
 COPY ./nextGW /usr/src/app
 
-RUN npm install
 
-RUN npm run build
+RUN npm install \
+    && npm run build
 
 
 ### Copy the start script executing `nmcli`
 ###
 COPY start.sh .
 
-EXPOSE 3000
+EXPOSE 80:3000
 
 ### RUN ./nmcli -f=SSID,BARS d wifi
 

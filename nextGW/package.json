@@ -21,6 +21,7 @@
     "react-dom": "16.13.1",
     "react-player": "^2.6.0",
     "styled-components": "^5.1.1",
-    "underscore": "^1.10.2"
+    "underscore": "^1.10.2",
+    "wireless-tools": "^0.19.0"
   }
 }

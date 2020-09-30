@@ -35,7 +35,7 @@ export default function MyApp(props) {
         <title>WiFi App</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      {baseURL ? <Component {...pageProps} baseURL={baseURL} /> : null}
+        <Component {...pageProps} />
     </React.Fragment>
     </MuiThemeProvider>
   );

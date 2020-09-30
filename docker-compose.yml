@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  nextGW:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    network_mode: host
+    environment:
+      - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'
+    ports:
+      - "3000:3000"
+    labels:
+      io.balena.features.dbus: '1'

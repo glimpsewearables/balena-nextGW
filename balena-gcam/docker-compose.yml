@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+
+
+  glimpseCam:
+      build: .
+      priveleged: true
+      restart: always
+      network_mode: host
+      labels:
+              io.balena.features.kernel-modules: '1'
+
