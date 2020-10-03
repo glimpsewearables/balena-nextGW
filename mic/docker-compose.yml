@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  i2sMic:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    privileged: true
+    devices:
+      - "/dev/"
+    labels:
+      io.balena.features.kernel-modules: '1'

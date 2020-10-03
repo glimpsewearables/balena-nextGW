@@ -5,7 +5,7 @@ FROM balenalib/rpi-debian-node
 ENV PORT 3000
 
 RUN install_packages python
-RUN install_packages wireless-tools
+RUN install_packages iw
 ### D-Bus calls needs to be directed to the system bus that the host OS is listening on
 ###
 ENV DBUS_SYSTEM_BUS_ADDRESS unix:path=/host/run/dbus/system_bus_socket

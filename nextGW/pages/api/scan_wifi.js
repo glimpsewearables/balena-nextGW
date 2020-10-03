@@ -1,7 +1,7 @@
-import * as iwlist from 'wireless-tools/iwlist';
+import * as iw from 'wireless-tools/iw';
 
 export default async (req, res) => {
-	iwlist.scan('wlan0' ,function (error, networks) {
+	iw.scan('wlan0' ,function (error, networks) {
 		if (error) {
 			console.log(error);
 			res.status(500).json({ error: 'Internal Server Error' });

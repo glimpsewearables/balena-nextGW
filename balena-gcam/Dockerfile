@@ -1,27 +1,29 @@
 FROM balenalib/rpi-raspbian
 
 RUN install_packages python
-RUN install_pacakages python3-pip
 RUN install_packages RPi.GPIO
 RUN install_packages python-gpiozero
-RUN install_pacakages alsa-utils
 RUN apt-get install libraspberrypi-bin -y
-RUN usermod -a -G video root
+RUN install_packages git
+RUN install_packages npm
 
-RUN mkdir /app
 
-RUN addgroup pi && adduser --system --ingroup pi pi
+RUN git clone https://github.com/glimpsewearables/pikrellcam.git
 
-COPY pikrellcam/ /home/pi/pikrellcam/
+COPY node-v11.15.0-linux-armv6l.tar.gz ./home/pi/node-v11.15.0-linux-armv6l.tar.gz
+RUN tar -xzf ./home/pi/node-v11.15.0-linux-armv6l.tar.gz
+RUN cd node-v11.15.0-linux-armv6l/
+COPY * /usr/local/
+
+RUN npm config set strict-ssl false
+RUN npm install npx
+
+
+ENV PORT 3000
+
 COPY glimpse-cam/ /home/pi/glimpse-cam/
-COPY i2smic.py /home/pi/is2mic.py
-COPY start.sh /start.sh
-
-ENV USER=pi
-
-RUN chown -R pi:pi /home/pi && echo "pi ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-USER pi
 
 
-EXPOSE 80
+
+EXPOSE 3000
 
