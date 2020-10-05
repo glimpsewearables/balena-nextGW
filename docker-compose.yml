@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  nextGW:
+  nextgw:
    build:
      context: .
      dockerfile: ./Dockerfile
@@ -14,7 +14,7 @@ services:
    labels:
      io.balena.features.dbus: '1'
 
-  glimpseCam:
+  glimpsecam:
     build:
       context: ./balena-gcam
       dockerfile: ./Dockerfile
