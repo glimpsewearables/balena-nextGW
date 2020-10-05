@@ -2,17 +2,26 @@ version: '2'
 
 services:
   nextGW:
+   build:
+     context: .
+     dockerfile: ./Dockerfile
+   network_mode: host
+   privileged: true
+   environment:
+     - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'
+   ports:
+     - "80:80"
+   labels:
+     io.balena.features.dbus: '1'
+
+  glimpseCam:
     build:
-      context: .
+      context: ./balena-gcam
       dockerfile: ./Dockerfile
-    network_mode: host
     privileged: true
-    environment:
-      - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'
-    ports:
+    ports: 
       - "3000:3000"
+    restart: always
+    network_mode: "host"
     labels:
-      io.balena.features.dbus: '1'
-
-  
-
+      io.balena.features.kernel-modules: '1'

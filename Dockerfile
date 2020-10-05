@@ -51,7 +51,7 @@ RUN npm install \
 ###
 COPY start.sh .
 
-EXPOSE 80:3000
+EXPOSE 80
 
 ### RUN ./nmcli -f=SSID,BARS d wifi
 
