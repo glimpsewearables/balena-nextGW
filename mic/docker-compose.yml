@@ -1,12 +1,16 @@
 version: '2'
 
 services:
-  i2sMic:
+  i2s:
     build:
       context: .
       dockerfile: ./Dockerfile
     privileged: true
     devices:
       - "/dev/"
+    volumes:
+      - /lib/modules:/lib/modules
+      - /usr/src:/usr/src
+
     labels:
       io.balena.features.kernel-modules: '1'
